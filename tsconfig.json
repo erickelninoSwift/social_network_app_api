@@ -1,12 +1,11 @@
 {
   "compilerOptions": {
-    "module": "system",
-    "noImplicitAny": true,
-    "removeComments": true,
-    "preserveConstEnums": true,
-    "outFile": "../../built/local/tsc.js",
-    "sourceMap": true
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
+    "baseUrl": "src",
+    "outDir": "dist",
+    "sourceMap": true,
+    "noImplicitAny": true
   },
-  "include": ["src/**/*"],
-  "exclude": ["**/*.ts"]
+  "include": ["src/**/*.ts"]
 }
