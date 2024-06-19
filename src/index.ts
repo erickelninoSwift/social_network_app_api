@@ -1,6 +1,7 @@
 import express, { response } from "express";
 import dotenv from "dotenv";
 import http from "http";
+import userRouter from "./routes/userRoutes";
 dotenv.config();
 
 const app = express();
@@ -14,44 +15,7 @@ app.get("/", (request, response) => {
   return response.send("<h1>Home</h1>");
 });
 
-app.post("/users", (request: express.Request, repsonse: express.Response) => {
-  return response.status(501).json({
-    error: " not impelemented",
-  });
-});
-
-app.get("/user", (request: express.Request, repsonse: express.Response) => {
-  return response.status(501).json({
-    data: "No users",
-  });
-});
-
-app.get(
-  "/users/:id",
-  (request: express.Request, repsonse: express.Response) => {
-    return response.status(501).json({
-      data: "no user found",
-    });
-  }
-);
-
-app.put(
-  "/users/:id",
-  (request: express.Request, repsonse: express.Response) => {
-    return response.status(501).json({
-      data: "no user found",
-    });
-  }
-);
-
-app.delete(
-  "/users/:id",
-  (request: express.Request, repsonse: express.Response) => {
-    return response.status(501).json({
-      data: "no user found",
-    });
-  }
-);
+app.use(userRouter);
 
 server.listen(process.env.PORT, () => {
   console.log(`Server is running on PORT: ${process.env.PORT}`);
