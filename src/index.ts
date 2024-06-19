@@ -10,6 +10,9 @@ const server: http.Server<
   typeof http.ServerResponse
 > = http.createServer(app);
 
+app.get("/", (request, response) => {
+  return response.send("Hello world");
+});
 server.listen(process.env.PORT, () => {
   console.log(`Server is running on PORT: ${process.env.PORT}`);
 });
