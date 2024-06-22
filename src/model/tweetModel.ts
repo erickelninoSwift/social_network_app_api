@@ -2,15 +2,6 @@ import mongoose from "mongoose";
 
 const Schema = mongoose.Schema;
 
-interface tweetuser {
-  userId: String;
-  username: String;
-}
-
-interface tweet {
-  user: tweetuser;
-}
-
 export const tweetSchema = new Schema(
   {
     user: {

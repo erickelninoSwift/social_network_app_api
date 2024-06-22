@@ -1,9 +1,10 @@
-import express, { response } from "express";
+import express from "express";
 import dotenv from "dotenv";
 import http from "http";
 import userRouter from "./routes/userRoutes";
 import tweetRoutes from "./routes/tweetRoutes";
 import cors from "cors";
+import { connectToMongo } from "./connect/database";
 dotenv.config();
 
 const app = express();
@@ -13,7 +14,7 @@ const server: http.Server<
   typeof http.ServerResponse
 > = http.createServer(app);
 
-app.get("/", (request, response) => {
+app.get("/", (request: express.Request, response: express.Response) => {
   return response.send("<h1>Welcome to our App</h1>");
 });
 
@@ -32,5 +33,6 @@ app.use("/tweets", tweetRoutes);
 // ==========================
 
 server.listen(process.env.PORT, () => {
+  connectToMongo();
   console.log(`Server is running on PORT: ${process.env.PORT}`);
 });

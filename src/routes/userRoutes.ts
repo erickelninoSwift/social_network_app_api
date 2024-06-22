@@ -1,24 +1,21 @@
 import express, { Router } from "express";
 
+import {
+  getAllusersController,
+  registerUserController,
+  getuserController,
+} from "../controllers/usersControllers";
+
 const router: Router = express.Router();
 
-router.post("/", (request: express.Request, response: express.Response) => {
-  return response.status(501).json({
-    error: " not impelemented",
-  });
-});
+// get All users
+router.get("/", getAllusersController);
 
-router.get("/", (request: express.Request, response: express.Response) => {
-  return response.status(501).json({
-    data: "No users",
-  });
-});
+// get one user
+router.get("/:id", getuserController);
 
-router.get("/:id", (request: express.Request, response: express.Response) => {
-  return response.status(501).json({
-    data: "no user found",
-  });
-});
+//  register user
+router.post("/", registerUserController);
 
 router.put("/:id", (request: express.Request, response: express.Response) => {
   return response.status(501).json({

@@ -1,5 +1,4 @@
 import mongoose from "mongoose";
-import { tweetSchema } from "./tweetModel";
 interface IUser {
   username: String;
   email: String;
@@ -50,7 +49,7 @@ const user = new mongoose.Schema<IUser>(
     isVerified: { type: Boolean, default: false },
     tweetsId: {
       type: [String],
-      required: true,
+      default: [""],
     },
   },
   { timestamps: true }
