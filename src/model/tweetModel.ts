@@ -2,36 +2,21 @@ import mongoose from "mongoose";
 
 const Schema = mongoose.Schema;
 
-const tweetSchema: any = new Schema({
-  username: {
+export const tweetSchema = new Schema({
+  user: {
+    type: Schema.Types.ObjectId,
+    userID: { type: String, required: true },
+    user: { type: String, required: true },
+    required: true,
+  },
+  text: {
     type: String,
     required: true,
-    unique: true,
-    trim: true,
-    minlength: 3,
-    maxlength: 20,
+    maxlength: 280,
   },
-  email: {
-    type: String,
-    required: true,
-    unique: true,
-    trim: true,
-    lowercase: true,
-    match: /^\S+@\S+\.\S+$/,
-  },
-  password: {
-    type: String,
-    required: true,
-    minlength: 6,
-  },
-  fullName: {
-    type: String,
-    required: true,
-    maxlength: 50,
-  },
-  bio: {
-    type: String,
-    maxlength: 160,
+  likes: {
+    type: Number,
+    default: 0,
   },
   createdAt: {
     type: Date,

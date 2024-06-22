@@ -1,22 +1,58 @@
 import mongoose from "mongoose";
-
-const user: any = new mongoose.Schema({
+import { tweetSchema } from "./tweetModel";
+interface IUser {
+  username: String;
+  email: String;
+  password: String;
+  fullname: String;
+  bio: String;
+  avatar: String;
+  createdAt: Date;
+  isVerified: false;
+  tweetsId: String[];
+}
+const user = new mongoose.Schema<IUser>({
   username: {
     type: String,
     required: true,
     unique: true,
+    trim: true,
+    minlength: 3,
+    maxlength: 20,
   },
   email: {
     type: String,
     required: true,
     unique: true,
+    trim: true,
+    lowercase: true,
+    match: /^\S+@\S+\.\S+$/,
   },
   password: {
     type: String,
     required: true,
+    minlength: 6,
   },
-  fullName: {
+  fullname: {
     type: String,
+    required: true,
+    maxlength: 50,
+  },
+  bio: {
+    type: String,
+    maxlength: 160,
+  },
+  avatar: {
+    type: String,
+    default: "default_avatar.jpg",
+  },
+  createdAt: {
+    type: Date,
+    default: Date.now,
+  },
+  isVerified: { type: Boolean, default: false },
+  tweetsId: {
+    type: [String],
     required: true,
   },
 });
