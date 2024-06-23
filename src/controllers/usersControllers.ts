@@ -1,6 +1,6 @@
 import userModel from "../model/userModel";
 import express from "express";
-
+import { hashPassWord } from "../utils/utils";
 export const getAllusersController = async (
   request: express.Request,
   response: express.Response
@@ -30,10 +30,19 @@ export const registerUserController = async (
   const { username, email, password, fullname, bio, avatar, tweetsId } =
     request.body;
   try {
+    const findUser = await userModel.findOne({ email: email });
+
+    if (findUser) {
+      return response.json({
+        message: `User with email : ${email} already exist in the database`,
+      });
+    }
+
+    const passwordHashed = hashPassWord(password);
     const registeruser = new userModel({
       username,
       email,
-      password,
+      password: passwordHashed,
       fullname,
       bio,
       avatar,
@@ -41,7 +50,7 @@ export const registerUserController = async (
     });
 
     const user = await registeruser.save();
-    console.log(user);
+
     if (!user) {
       return response.status(400).json({
         status: "failed",
@@ -84,4 +93,48 @@ export const getuserController = async (
   } catch (error) {
     return response.json(error);
   }
+};
+
+export const deleteUserController = async (
+  request: express.Request,
+  response: express.Response
+) => {
+  const { id } = request.params;
+
+  try {
+    const deleteUser = await userModel.findOneAndDelete({
+      _id: id,
+    });
+    if (!deleteUser) {
+      response.json({
+        message: "failed to delete",
+      });
+    }
+
+    return response.status(201).json({
+      userdeleted: deleteUser,
+    });
+  } catch (error) {
+    return response.status(403).json({
+      error,
+    });
+  }
+};
+
+export const handleUpdateuserdetail = async (
+  request: express.Request,
+  response: express.Response
+) => {
+  console.log();
+  try {
+  } catch (error) {
+    return response.status(501).json({
+      data: "internal Server issue ",
+    });
+  }
+};
+
+export const handleUpdateuserdetails = async () => {
+  try {
+  } catch (error) {}
 };

@@ -28,11 +28,11 @@ export const createToken = (
     { id: id, email: email, username: username },
     process.env.PRIVATEKEY,
     {
-      expiresIn: "3d",
+      expiresIn: "1h",
     }
   );
 };
 
-export const verifyToken = (token: string) => {
+export const verifyToken: jwt.JwtPayload = (token: string) => {
   return jwt.verify(token, process.env.PRIVATEKEY);
 };

@@ -1,9 +1,11 @@
 import express, { Router } from "express";
-
+import { handleValidationRegistration } from "../middleware/registerValidation";
 import {
   getAllusersController,
   registerUserController,
   getuserController,
+  deleteUserController,
+  handleUpdateuserdetail,
 } from "../controllers/usersControllers";
 
 const router: Router = express.Router();
@@ -15,21 +17,14 @@ router.get("/", getAllusersController);
 router.get("/:id", getuserController);
 
 //  register user
-router.post("/", registerUserController);
+router.post("/", handleValidationRegistration, registerUserController);
 
-router.put("/:id", (request: express.Request, response: express.Response) => {
-  return response.status(501).json({
-    data: "no user found",
-  });
-});
+// ddelete the user
 
-router.delete(
-  "/:id",
-  (request: express.Request, response: express.Response) => {
-    return response.status(501).json({
-      data: "no user found",
-    });
-  }
-);
+router.delete("/:id", deleteUserController);
+
+// Update specific user details
+
+router.put("/:id", handleUpdateuserdetail);
 
 export default router;

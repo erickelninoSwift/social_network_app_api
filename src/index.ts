@@ -21,7 +21,8 @@ app.get("/", (request: express.Request, response: express.Response) => {
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cors());
-// endpoints to get all ursers
+
+// Users endpoint
 // =============================
 app.use("/users", userRouter);
 
