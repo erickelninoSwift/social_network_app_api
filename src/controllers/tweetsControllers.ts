@@ -109,23 +109,31 @@ export const updateTweet = async (
 ) => {
   const { id } = request.params;
   const { content, user } = request.body;
+
   try {
-    const findTWeetToedit = await tweetModel.findOne({ _id: id, user: user });
-    console.log(findTWeetToedit);
+    const findTWeetToedit = await tweetModel.findOne({ _id: id });
+
     if (!findTWeetToedit) {
       return response.status(404).json({
         status: "failed",
         message: "tweet to update was not found ",
       });
     }
-    if (content != undefined) {
-      findTWeetToedit.text = content;
+
+    if (user !== undefined && findTWeetToedit.user === user) {
+      if (content != undefined) {
+        findTWeetToedit.text = content;
+      }
+      await findTWeetToedit.save();
+
+      return response.status(200).json({
+        status: "Data updated",
+        data: findTWeetToedit,
+      });
     }
-    await findTWeetToedit.save();
 
     return response.status(200).json({
-      status: "Data updated",
-      data: findTWeetToedit,
+      message: "we could not updated data please make sure id is correct",
     });
   } catch (error) {
     return response.status(500).json({

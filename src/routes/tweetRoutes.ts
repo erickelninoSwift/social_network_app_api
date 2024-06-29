@@ -12,6 +12,6 @@ router.get("/", getAllTweets);
 router.post("/", createTweet);
 router.get("/:tweetid", getTweetbyID);
 router.delete("/:id", deleteTweetByID);
-router.patch("/:id", updateTweet);
+router.put("/:id", updateTweet);
 
 export default router;
