@@ -58,7 +58,7 @@ export const getTweetbyID = async (
   response: express.Response
 ) => {
   const { tweetid } = request.params;
-  console.log(tweetid);
+
   try {
     const tweet = await tweetModel.findOne({ _id: tweetid });
     if (!tweet) {
@@ -98,6 +98,37 @@ export const deleteTweetByID = async (
   } catch (error) {
     return response.status(501).json({
       status: "node found",
+      error: error.message,
+    });
+  }
+};
+
+export const updateTweet = async (
+  request: express.Request,
+  response: express.Response
+) => {
+  const { id } = request.params;
+  const { content, user } = request.body;
+  try {
+    const findTWeetToedit = await tweetModel.findOne({ _id: id, user: user });
+    console.log(findTWeetToedit);
+    if (!findTWeetToedit) {
+      return response.status(404).json({
+        status: "failed",
+        message: "tweet to update was not found ",
+      });
+    }
+    if (content != undefined) {
+      findTWeetToedit.text = content;
+    }
+    await findTWeetToedit.save();
+
+    return response.status(200).json({
+      status: "Data updated",
+      data: findTWeetToedit,
+    });
+  } catch (error) {
+    return response.status(500).json({
       error: error.message,
     });
   }
