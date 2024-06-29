@@ -6,8 +6,8 @@ export const tweetSchema = new Schema(
   {
     user: {
       type: Schema.Types.ObjectId,
-      userID: { type: String, required: true },
-      user: { type: String, required: true },
+      userid: { type: String, required: true },
+      username: { type: String, required: true },
       required: true,
     },
     text: {

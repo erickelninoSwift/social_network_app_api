@@ -121,20 +121,40 @@ export const deleteUserController = async (
   }
 };
 
-export const handleUpdateuserdetail = async (
+export const handleUpdacteuserdetails = async (
   request: express.Request,
   response: express.Response
 ) => {
-  console.log();
+  const { id } = request.params;
+  const { mybio, myname, image } = request.body;
+
   try {
+    const findUsertoUpdate = await userModel.findOne({ _id: id });
+    if (!findUsertoUpdate) {
+      return response.status(404).json({
+        message: "the user you are trying to update does not exist",
+      });
+    }
+
+    if (mybio != undefined) {
+      findUsertoUpdate.bio = mybio;
+    }
+
+    if (myname !== undefined) {
+      findUsertoUpdate.username = myname;
+    }
+
+    if (image !== undefined) {
+      findUsertoUpdate.avatar = image;
+    }
+    await findUsertoUpdate.save();
+
+    return response.status(200).json({
+      findUsertoUpdate,
+    });
   } catch (error) {
-    return response.status(501).json({
-      data: "internal Server issue ",
+    return response.json({
+      error,
     });
   }
-};
-
-export const handleUpdateuserdetails = async () => {
-  try {
-  } catch (error) {}
 };

@@ -5,7 +5,7 @@ import {
   registerUserController,
   getuserController,
   deleteUserController,
-  handleUpdateuserdetail,
+  handleUpdacteuserdetails,
 } from "../controllers/usersControllers";
 
 const router: Router = express.Router();
@@ -25,6 +25,6 @@ router.delete("/:id", deleteUserController);
 
 // Update specific user details
 
-router.put("/:id", handleUpdateuserdetail);
+router.put("/:id", handleUpdacteuserdetails);
 
 export default router;
