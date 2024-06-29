@@ -5,9 +5,7 @@ const Schema = mongoose.Schema;
 export const tweetSchema = new Schema(
   {
     user: {
-      type: Schema.Types.ObjectId,
-      userid: { type: String, required: true },
-      username: { type: String, required: true },
+      type: String,
       required: true,
     },
     text: {
