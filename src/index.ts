@@ -28,7 +28,7 @@ app.use(cookieParser());
 // Users endpoint
 // =============================
 app.use("/users", userRouter);
-
+app.use("/auth", AuthRoute);
 // ==============================
 // Tweets endpoints
 
