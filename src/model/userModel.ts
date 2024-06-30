@@ -9,6 +9,7 @@ interface IUser {
   createdAt: Date;
   isVerified: false;
   tweetsId: String[];
+  UserToken: String[];
 }
 const user = new mongoose.Schema<IUser>(
   {
@@ -48,6 +49,10 @@ const user = new mongoose.Schema<IUser>(
     },
     isVerified: { type: Boolean, default: false },
     tweetsId: {
+      type: [String],
+      default: [],
+    },
+    UserToken: {
       type: [String],
       default: [],
     },
