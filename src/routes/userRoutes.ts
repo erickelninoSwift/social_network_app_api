@@ -1,5 +1,6 @@
 import express, { Router } from "express";
 import { handleValidationRegistration } from "../middleware/registerValidation";
+import { handleCheckUserExst } from "../middleware/checkUserExist";
 import {
   getAllusersController,
   registerUserController,
@@ -17,7 +18,12 @@ router.get("/", getAllusersController);
 router.get("/:id", getuserController);
 
 //  register user
-router.post("/", handleValidationRegistration, registerUserController);
+router.post(
+  "/",
+  handleValidationRegistration,
+  handleCheckUserExst,
+  registerUserController
+);
 
 // ddelete the user
 

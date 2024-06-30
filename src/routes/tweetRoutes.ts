@@ -5,10 +5,12 @@ import {
   getTweetbyID,
   deleteTweetByID,
   updateTweet,
+  getAllTweetsByUser,
 } from "../controllers/tweetsControllers";
 const router: Router = express.Router();
 
 router.get("/", getAllTweets);
+router.get("/", getAllTweetsByUser);
 router.post("/", createTweet);
 router.get("/:tweetid", getTweetbyID);
 router.delete("/:id", deleteTweetByID);

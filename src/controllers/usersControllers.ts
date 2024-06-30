@@ -6,7 +6,7 @@ export const getAllusersController = async (
   response: express.Response
 ) => {
   try {
-    const alluser = await userModel.find({});
+    const alluser = await userModel.find({}, { password: 0 });
     if (!alluser) {
       return response.status(200).json({
         status: "success",

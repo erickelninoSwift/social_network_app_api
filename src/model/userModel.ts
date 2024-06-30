@@ -49,7 +49,7 @@ const user = new mongoose.Schema<IUser>(
     isVerified: { type: Boolean, default: false },
     tweetsId: {
       type: [String],
-      default: [""],
+      default: [],
     },
   },
   { timestamps: true }

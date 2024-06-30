@@ -3,7 +3,9 @@ import dotenv from "dotenv";
 import http from "http";
 import userRouter from "./routes/userRoutes";
 import tweetRoutes from "./routes/tweetRoutes";
+import AuthRoute from "./routes/AuthRoutes";
 import cors from "cors";
+import cookieParser from "cookie-parser";
 import { connectToMongo } from "./connect/database";
 dotenv.config();
 
@@ -21,6 +23,7 @@ app.get("/", (request: express.Request, response: express.Response) => {
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cors());
+app.use(cookieParser());
 
 // Users endpoint
 // =============================

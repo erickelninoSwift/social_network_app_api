@@ -5,7 +5,7 @@ export const handleValidationRegistration = async (
   response: express.Response,
   next: express.NextFunction
 ) => {
-  const { username, email, password, fullname, bio, avatar } = request.body;
+  const { username, email, password, fullname, bio } = request.body;
   if (!username || !email || !password || !fullname || !bio) {
     return response.status(401).json({
       error: "please make sure you have all the field filled",
